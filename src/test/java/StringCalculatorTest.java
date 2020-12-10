@@ -23,4 +23,9 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(Integer.MIN_VALUE, calculator.add("1,2,sometext"));
     }
+    @Test
+    public void testAddShouldReturn6()  {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("1\n2,3"));
+    }
 }
