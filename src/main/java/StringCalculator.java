@@ -15,14 +15,24 @@ public class StringCalculator {
 
         String input[] = numbers.split(delimiter);
         int sum = 0;
-
+        String negatives="";
         for(String i:input){
             try{
-            sum += Integer.parseInt(i);
+            int n = Integer.parseInt(i);
+            if(n<0){
+                if(negatives.length()==0)
+                negatives += n;
+                else
+                negatives += ","+n;
+            }
+            if(negatives.length() == 0)sum += n;
             }
             catch(Exception e){
                 return exceptionHandler(e);
             }
+        }
+        if(negatives.length()>0){
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
         }
         return sum;
     }
