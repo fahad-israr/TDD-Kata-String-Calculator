@@ -25,7 +25,7 @@ public class StringCalculator {
                 else
                 negatives += ","+n;
             }
-            if(negatives.length() == 0)sum += n;
+            if(negatives.length() == 0 && n<=1000)sum += n;
             }
             catch(Exception e){
                 return exceptionHandler(e);

@@ -50,4 +50,9 @@ public class StringCalculatorTest {
 			assertEquals(e.getMessage(), "Negatives not allowed: -4,-5");
 		}
     }
+    @Test
+    public void testAddShouldReturn2()  {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(2, calculator.add("1001,2"));
+    }
 }
