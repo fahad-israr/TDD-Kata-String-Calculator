@@ -4,15 +4,20 @@ public class StringCalculator {
         String delimiter = ",|\n";
         if(numbers.startsWith("//"))
         try{
-        delimiter = numbers.substring(numbers.indexOf("//")+2,numbers.indexOf("\n"));
-        numbers = numbers.substring(numbers.indexOf("\n")+1);
+            if(numbers.contains("[")){
+                delimiter = numbers.substring(numbers.indexOf("[")+1,numbers.indexOf("]"));
+            }
+            else{
+               delimiter = numbers.substring(numbers.indexOf("//")+2,numbers.indexOf("\n")); 
+            }
+            numbers = numbers.substring(numbers.indexOf("\n")+1);
         }
         catch(Exception e){
             return exceptionHandler(e);
         }
 
-        if(!delimiter.contains("\n"))delimiter += "|\n";
-
+        delimiter = processDelimiterforRegex(delimiter);
+        
         String input[] = numbers.split(delimiter);
         int sum = 0;
         String negatives="";
@@ -41,5 +46,12 @@ public class StringCalculator {
         System.out.println("Invalid Input");
         System.out.println(e);
         return Integer.MIN_VALUE;
+    }
+    public String processDelimiterforRegex(String delimiter){
+        if(delimiter.contains("+")||delimiter.contains("-")||delimiter.contains("*"))
+        delimiter="\\Q"+delimiter+"\\E";
+        
+        if(!delimiter.contains("\n"))delimiter += "|\n";
+        return delimiter;
     }
 }
